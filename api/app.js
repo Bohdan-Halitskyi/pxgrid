@@ -10,8 +10,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Configure CORS to allow requests from the frontend
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+    .split(',')
+    .map(origin => origin.trim());
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed for: ' + origin));
+    }
+  },
   methods: ['GET', 'POST'],
   credentials: true
 }));

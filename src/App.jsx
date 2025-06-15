@@ -3,7 +3,7 @@ import "./styles/App.css";
 import PixelGrid from "./Pixelgrid.jsx";
 import Toolbar from "./Toolbar.jsx";
 
-const URL = import.meta.env.VITE_API_URL || "/api";;
+const URL = import.meta.env.VITE_API_URL || "/api";
 
 const App = () => {
   const [grid, setGrid] = useState([]);
